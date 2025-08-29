@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "b37c3f07-d398-4cc9-b2bd-3fd6ae77a943",
+		"name": "Movimiento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32838946",
+		"_collection_link": "https://ntt222-3799.postman.co/workspace/Sofka~48fd8020-a8dd-4b48-961c-38ec8b8911a7/collection/32838946-b37c3f07-d398-4cc9-b2bd-3fd6ae77a943?action=share&source=collection_link&creator=32838946"
+	},
+	"item": [
+		{
+			"name": "Validate Movimiento 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numeroCuenta\": \"478758\",\n    \"tipoCuenta\": \"AHORRO\",\n    \"tipoMovimiento\": \"RETIRO\",\n    \"valor\": 575\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/movimientos/validar",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"movimientos",
+						"validar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Movimiento 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numeroCuenta\": \"225487\",\n    \"tipoCuenta\": \"Corriente\",\n    \"tipoMovimiento\": \"Deposito\",\n    \"valor\": 600\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movimientos/crear",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movimientos",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Movimiento 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numeroCuenta\": \"495878\",\n    \"tipoCuenta\": \"AHORRO\",\n    \"tipoMovimiento\": \"Deposito\",\n    \"valor\": 150\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movimientos/crear",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movimientos",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Movimiento 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numeroCuenta\": \"496825\",\n    \"tipoCuenta\": \"AHORRO\",\n    \"tipoMovimiento\": \"RETIRO\",\n    \"valor\": 540\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/movimientos/crear",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movimientos",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

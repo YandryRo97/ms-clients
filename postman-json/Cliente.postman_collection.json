@@ -1,0 +1,97 @@
+{
+  "info": {
+    "_postman_id": "5587b36c-6f0b-4b3d-8a55-9a0e313564ba",
+    "name": "Cliente",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32838946",
+    "_collection_link": "https://ntt222-3799.postman.co/workspace/Sofka~48fd8020-a8dd-4b48-961c-38ec8b8911a7/collection/32838946-5587b36c-6f0b-4b3d-8a55-9a0e313564ba?action=share&source=collection_link&creator=32838946"
+  },
+  "item": [
+    {
+  "info": {
+    "_postman_id": "5587b36c-6f0b-4b3d-8a55-9a0e313564ba",
+    "name": "Cliente",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32838946",
+    "_collection_link": "https://ntt222-3799.postman.co/workspace/Sofka~48fd8020-a8dd-4b48-961c-38ec8b8911a7/collection/32838946-5587b36c-6f0b-4b3d-8a55-9a0e313564ba?action=share&source=collection_link&creator=32838946"
+  },
+  "item": [
+    {
+      "name": "Create Cliente Jose Lema - Cuenta Ahorro",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": {\n    \"clienteId\": \"CLI001\",\n    \"nombre\": \"Jose Lema\",\n    \"direccion\": \"Otavalo sn y principal\",\n    \"telefono\": \"098254785\",\n    \"contrasena\": \"1234\",\n    \"estado\": true\n  },\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"Ahorro\",\n  \"saldoInicial\": 2000,\n  \"estado\": true\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "localhost:8080/clientes/cuenta",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["clientes", "cuenta"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Cliente Marianela Montalvo - Cuenta Corriente",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": {\n    \"clienteId\": \"CLI002\",\n    \"nombre\": \"Marianela Montalvo\",\n    \"direccion\": \"Amazonas y NNUU\",\n    \"telefono\": \"097548965\",\n    \"contrasena\": \"5678\",\n    \"estado\": true\n  },\n  \"numeroCuenta\": \"225487\",\n  \"tipoCuenta\": \"Corriente\",\n  \"saldoInicial\": 100,\n  \"estado\": true\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "localhost:8080/clientes/cuenta",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["clientes", "cuenta"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Cliente Juan Osorio - Cuenta Ahorros",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": {\n    \"clienteId\": \"CLI003\",\n    \"nombre\": \"Juan Osorio\",\n    \"direccion\": \"13 junio y Equinoccial\",\n    \"telefono\": \"098874587\",\n    \"contrasena\": \"1245\",\n    \"estado\": true\n  },\n  \"numeroCuenta\": \"495878\",\n  \"tipoCuenta\": \"Ahorros\",\n  \"saldoInicial\": 0,\n  \"estado\": true\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "localhost:8080/clientes/cuenta",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["clientes", "cuenta"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Cliente by clienteId",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/clientes/CLI001",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["clientes", "CLI001"],
+          "query": [
+            { "key": "clienteId", "value": "CLI001", "disabled": true }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
+
+  ]
+}

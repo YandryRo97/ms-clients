@@ -3,16 +3,16 @@ version: '3.8'
 services:
 
   postgres-clients:
-    image: postgres:17
+    image: postgres:15
     container_name: postgres-db-clients
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: tarpuqPass
+      POSTGRES_PASSWORD: pass123
       POSTGRES_DB: bank-clients
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data-clients
+      - postgres-data-clients:/var/lib/postgresql/data
     networks:
       - app-network
 
@@ -26,16 +26,16 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data-transactions
+      - postgres-data-transactions:/var/lib/postgresql/data
     networks:
       - app-network
 
   rabbitmq:
     image: rabbitmq:management
-    container_name: rabbitmq-server
+    container_name: rabbitmq
     ports:
-      - "5672:5672" # Puerto conexión de RabbitMQ
-      - "15672:15672" # Puerto GUI de RabbitMQ
+      - "5672:5672"   # AMQP
+      - "15672:15672" # Management UI
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
@@ -48,39 +48,66 @@ services:
     restart: always
     ports:
       - "6379:6379"
+    networks:
+      - app-network
 
-  # Microservicio bank-clients
+  # Microservicio ms-clients
   ms-clients:
     image: ms-clients
     container_name: ms-clients
     ports:
       - "8080:8080"
     environment:
+      # DB (usa host de servicio, no localhost)
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-clients:5432/bank-clients
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: pass123
+
+      # RabbitMQ
       SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
+
+      # Redis (si lo usas)
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+
+      # WebClient -> apunta a ms-transactions DENTRO de la red Docker
+      WEBCLIENT_BASE_URL: http://ms-transactions:8081
+      # Si en tu código usas @Value("${webclient.base-url}"), Spring lo
+      # mapea desde esta env var automáticamente (relaxed binding).
+
+      # Perfil opcional
+      SPRING_PROFILES_ACTIVE: docker
     networks:
       - app-network
     depends_on:
       - postgres-clients
       - rabbitmq
+      - ms-transactions
 
-  # Microservicio bank-transactions
-  bank-transactions:
-    image: bank-transactions
-    container_name: bank-transactions
+  # Microservicio ms-transactions
+  ms-transactions:
+    image: ms-transactions
+    container_name: ms-transactions
     ports:
       - "8081:8081"
     environment:
+      # DB (usa host de servicio, no localhost)
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-transactions:5432/bank-transactions
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: pass123
+
+      # RabbitMQ (si consume/publica)
       SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
+
+      # Redis (si lo usas)
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
     networks:
       - app-network
     depends_on:
@@ -92,5 +119,7 @@ networks:
     driver: bridge
 
 volumes:
-  postgres-data:
+  postgres-data-clients:
+    driver: local
+  postgres-data-transactions:
     driver: local
